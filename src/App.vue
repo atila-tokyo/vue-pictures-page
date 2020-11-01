@@ -1,40 +1,27 @@
 <template>
   <div class="body">
-    <h1 class="text">{{ title }}</h1>
 
-    <ul class="photo-list">
-      <li class="item-photo-list" v-for="photo of photos" v-bind:key="photo">
-        <div class="pannel">
-          <h2 class="pannel-title">{{ photo.titulo }}</h2>
-          <div class="pannel-content">
-            <img class="responsive" :src="photo.url" :alt="photo.title">
-          </div>
-        </div>     
-      </li>
-    </ul>
+    <my-menu :routing="routes"/>
+    
+    <transition name="page">
+    <router-view></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
-import Pannel from './components/shared/pannel/Pannel';
+import { routes } from './routes';
+import Menu from './components/shared/menu/Menu';
 
 export default {
-
   components: {
-    'my-pannel': Pannel
+    'my-menu': Menu
   },
-
   data() {
-      return {
-        title: 'Vue Pictures Page',
-        photos: []
+    return {
+      routes
     }
-  },
-  created() {
-    this.$http.get('http://localhost:3000/v1/fotos')
-      .then(res => res.json())
-      .then(photos => this.photos = photos);
-    }
+  }
 }
 </script>
 
@@ -45,20 +32,12 @@ export default {
   margin: 0 auto;
 }
 
-.text {
-  text-align: center;
-}
 
-.photo-list {
-  list-style: none;
-}
+.page-enter, .page-leave-active {
+  opacity: 0;
+} 
 
-.photo-list .item-photo-list {
-  display:inline-block;
+.page-enter-active, .page-leave-active  {
+  transition: opacity .4s;
 }
-
-.responsive {
-  width: 100%;
-}
-
 </style>

@@ -11,7 +11,12 @@
         <my-pannel :titulo="photo.titulo">  
 
             <responsive-img :url="photo.url" :titulo="photo.titulo"/>
-            <my-button kind="button" label="REMOVE" @activateButton="remove(photo)"/>
+            <my-button 
+            kind="button" 
+            label="REMOVE" 
+            @activateButton="remove(photo)"
+            :confirmation="true"
+            style="danger"/>
 
         </my-pannel>    
       </li>
