@@ -1,8 +1,8 @@
 <template>
     <nav>
       <ul>
-        <li v-for="route in routes" v-bind:key=route>
-          <router-link :to="route.path ? route.path : '/'">{{ route.title }}</router-link>
+        <li v-for="routee in routing" v-bind:key=routee>
+          <router-link :to="routee.path ? routee.path : '/'">{{ routee.title }}</router-link>
         </li>
       </ul>
     </nav>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-    
+    props: ['routing']
 }
 </script>
 

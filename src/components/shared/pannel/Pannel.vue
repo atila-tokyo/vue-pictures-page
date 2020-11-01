@@ -1,18 +1,27 @@
 <template>
     <div class="pannel">
-        <h2 class="pannel-title">{{ photo.titulo }}</h2>
-        <div class="pannel-content">
+        <h2 class="pannel-title" @dblclick="visible = !visible">{{ titulo }}</h2>
+        <transition name="pannel-fade">
+        <div class="pannel-content" v-show="visible">
+        <slot></slot>
         </div>  
+        </transition>
     </div>
 </template>
 
 <script>
 export default {
-    props: ['titulo']
+    props: ['titulo'],
+    data() {
+      return {
+        visible: true
+      }
+    }
 }
 </script>
 
-<style>
+/* scoped with the tag locks style configs for this component only */
+<style scoped>
 
 /*Pannel style*/
 .pannel {
@@ -35,4 +44,26 @@ export default {
   padding: 10px;
   text-transform: uppercase;
 }
+
+.pannel * {
+  box-shadow: 5px 5px 10px black;
+}
+
+.pannel-fade-enter, .pannel-fade-leave-active {
+  opacity: 0;
+} 
+
+.pannel-fade-enter-active, .pannel-fade-leave-active  {
+  transition: opacity .4s;
+}
+
+
+.pannel-fade-enter, .pannel-fade-leave-active {
+  opacity: 0;
+} 
+
+.pannel-fade-enter-active, .pannel-fade-leave-active  {
+  transition: opacity .4s;
+}
+
 </style>
